@@ -24,7 +24,7 @@ async function run() {
     execSync(testCommand).toString();
     const coverageData = fs.readFileSync('./coverage/coverage-summary.json');
     // coveragePercentage = parseFloat(coveragePercentage).toFixed(2);
-    console.log(coverageData);
+    console.log(JSON.parse(coverageData));
 
     /* const commentBody = `<p>Total Coverage: <code>${coveragePercentage}</code></p>
     <details><summary>Coverage report</summary>
