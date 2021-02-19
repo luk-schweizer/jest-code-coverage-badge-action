@@ -15,7 +15,7 @@ async function run() {
   const repoName = context.repo.repo;
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
-  const testCommand = 'npx jest --coverage --coverageReporters="json-summary" --config="jest.config.json"';
+  const testCommand = 'npx jest --coverage --coverageReporters="json-summary" --config="./jest.config.json"';
   const octokit = github.getOctokit(repoToken);
 
 
