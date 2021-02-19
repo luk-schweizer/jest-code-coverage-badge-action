@@ -20,8 +20,8 @@ async function run() {
       },
   );
 
-  const prNumber = commitPRs.data[0].number;
-  console.log(prNumber);
+  //const prNumber = commitPRs.data[0].number;
+  //console.log(prNumber);
 
   await exec.exec(testCommand);
   const coverageData = fs.readFileSync('./coverage/coverage-summary.json');
