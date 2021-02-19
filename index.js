@@ -1,14 +1,15 @@
 const core = require('@actions/core');
-const { GitHub, context } = require("@actions/github");
+const github = require('@actions/github');
 const exec = require('@actions/exec');
 const fs = require('fs');
 
 async function run() {
+  const context = github.context;
   const repoName = context.repo.repo;
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
   const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
-  const octokit = new GitHub(repoToken);
+  const octokit = github.getOctokit(repoToken);
 
 
   const commitPRs = await octokit.repos.listPullRequestsAssociatedWithCommit(

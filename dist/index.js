@@ -6,16 +6,17 @@ module.exports =
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(186);
-const { GitHub, context } = __nccwpck_require__(438);
+const github = __nccwpck_require__(438);
 const exec = __nccwpck_require__(514);
 const fs = __nccwpck_require__(747);
 
 async function run() {
+  const context = github.context;
   const repoName = context.repo.repo;
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
   const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
-  const octokit = new GitHub(repoToken);
+  const octokit = github.getOctokit(repoToken);
 
 
   const commitPRs = await octokit.repos.listPullRequestsAssociatedWithCommit(
