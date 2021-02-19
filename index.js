@@ -8,7 +8,7 @@ async function run() {
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
   const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
-  const octokit = new GitHub(repoToken);
+  const octokit = new github(repoToken);
 
 
   const commitPRs = await octokit.repos.listPullRequestsAssociatedWithCommit(
