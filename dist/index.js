@@ -9,10 +9,12 @@ const core = __nccwpck_require__(186);
 const github = __nccwpck_require__(438);
 const exec = __nccwpck_require__(514);
 const fs = __nccwpck_require__(747);
+const fetch = __nccwpck_require__(467);
 
 async function run() {
   const context = github.context;
   const repoName = context.repo.repo;
+  const ref = context.ref;
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
   const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
@@ -29,6 +31,21 @@ async function run() {
 
   //const prNumber = commitPRs.data[0].number;
   //console.log(prNumber);
+
+  const url = 'https://img.shields.io/badge/coverage-90-green'
+  const response = await fetch(url);
+  const badgeContent = await response.buffer();
+
+  await octokit.repos.createOrUpdateFileContents(
+    {
+        owner: repoOwner,
+        repo: repoName,
+        path: '.coverage/badge.svg',
+        message: `Code Coverage Badge for Build number `,
+        content: badgeContent,
+        branch: ref
+    }
+  );
 
   await exec.exec(testCommand);
   const coverageData = fs.readFileSync('./coverage/coverage-summary.json');
