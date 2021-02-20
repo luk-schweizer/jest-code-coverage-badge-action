@@ -1,24 +1,9 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Badge Coverage Generator'
+description: 'Badge Coverage Generator'
 inputs:
-  who-to-greet:
-    description: 'Who to greet'
-    required: true
-    default: 'World'
   repo-token:
     description: 'Github Token'
     required: true
-  generate-badge:
-    description: "Specify if action will generate badge for readme file"
-    required: false
-    default: true
-  add-comment:
-    description: "Specify if action will generate a comment in the PR/Commit"
-    required: false
-    default: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node12'
   main: 'dist/index.js'
