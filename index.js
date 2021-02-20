@@ -54,7 +54,7 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
       console.log('badge not found');
     }
 
-      const response = await fetch(url);
+      const response = await fetch(badgeUrl);
       const badgeContent = await response.buffer();
       const badgeContentBase64 = badgeContent.toString('base64');
 
