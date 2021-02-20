@@ -36,18 +36,23 @@ async function run() {
   const url = 'https://img.shields.io/badge/coverage-90-green';
   const response = await fetch(url);
   const badgeContent = await response.buffer();
+  const badgeContentBase64 = badgeContent.toString('base64');
 
-  await octokit.repos.createOrUpdateFileContents(
-    {
-        owner: repoOwner,
-        repo: repoName,
-        path: '.coverage/badge.svg',
-        message: `Code Coverage Badge for Build number `,
-        content: badgeContent.toString('base64'),
-        branch: ref,
-        sha: sha
-    }
-  );
+  if (existingBadge.data && existingBadge.data.content !== badgeContentBase64) {
+    await octokit.repos.createOrUpdateFileContents(
+        {
+            owner: repoOwner,
+            repo: repoName,
+            path: '.coverage/badge.svg',
+            message: `Code Coverage Badge for Build number `,
+            content: badgeContentBase64,
+            branch: ref,
+            sha: sha
+        }
+      );
+    console.log('NO updating');
+  }
+
 
   await exec.exec(testCommand);
   const coverageData = fs.readFileSync('./coverage/coverage-summary.json');
