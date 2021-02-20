@@ -5,79 +5,69 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 
 async function run() {
+  const badgeFilePath = core.getInput('create-file');
+  const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
+
+  await exec.exec(testCommand);
+  const coverageData = getCoverageData();
+  const badgeUrl = generateBadgeUrl(coverageData);
+  if (badgeFilePath) {
+    await createOrUpdateBadgeFile(badgeFilePath, badgeUrl, coverageData);
+  }
+  core.setOutput("BADGE_URL", badgeUrl);
+}
+
+run().catch((err) => core.setFailed(err.message));
+
+const getCoverageData = () => {
+    const data = fs.readFileSync('./coverage/coverage-summary.json');
+    return JSON.parse(data);
+    // coveragePercentage = parseFloat(coveragePercentage).toFixed(2);
+}
+
+const generateBadgeUrl = (coverageData) => {
+    const url = 'https://img.shields.io/badge/coverage-90-green';
+    return url;
+}
+
+const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) => {
   const context = github.context;
   const repoName = context.repo.repo;
   const ref = context.ref;
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
-  const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
   const octokit = github.getOctokit(repoToken);
 
-
-  const commitPRs = await octokit.repos.listPullRequestsAssociatedWithCommit(
-      {
-        repo: repoName,
-        owner: repoOwner,
-        commit_sha: context.sha,
-      },
-  );
-
-  //const prNumber = commitPRs.data[0].number;
-  //console.log(prNumber);
   const existingBadge = null;
   const sha = null;
-try{
-  existingBadge = await octokit.repos.getContent({
-    owner: repoOwner,
-    repo: repoName,
-    path: '.coverage/badge.svg',
-    ref: ref
-  });
+    try{
+      existingBadge = await octokit.repos.getContent({
+        owner: repoOwner,
+        repo: repoName,
+        path: badgeFilePath,
+        ref: ref
+      });
 
-  console.log(existingBadge);
-  sha = existingBadge.data.sha;
-} catch (e) {
-  console.log('badge not found');
+      console.log(existingBadge);
+      sha = existingBadge.data.sha;
+    } catch (e) {
+      console.log('badge not found');
+    }
+
+      const response = await fetch(url);
+      const badgeContent = await response.buffer();
+      const badgeContentBase64 = badgeContent.toString('base64');
+
+        await octokit.repos.createOrUpdateFileContents(
+            {
+                owner: repoOwner,
+                repo: repoName,
+                path: '.coverage/badge.svg',
+                message: `Code Coverage Badge for Run number ${github.run_id}-${github.run_number}`,
+                content: badgeContentBase64,
+                branch: ref,
+                sha: sha
+            }
+          );
+        console.log('NO updating');
 }
-  const url = 'https://img.shields.io/badge/coverage-90-green';
-  const response = await fetch(url);
-  const badgeContent = await response.buffer();
-  const badgeContentBase64 = badgeContent.toString('base64');
-
-  if (!existingBadge || existingBadge.data.content !== badgeContentBase64) {
-    await octokit.repos.createOrUpdateFileContents(
-        {
-            owner: repoOwner,
-            repo: repoName,
-            path: '.coverage/badge.svg',
-            message: `Code Coverage Badge for Build number `,
-            content: badgeContentBase64,
-            branch: ref,
-            sha: sha
-        }
-      );
-    console.log('NO updating');
-  }
-
-
-  await exec.exec(testCommand);
-  const coverageData = fs.readFileSync('./coverage/coverage-summary.json');
-  // coveragePercentage = parseFloat(coveragePercentage).toFixed(2);
-  console.log(JSON.parse(coverageData));
-
-  /* const commentBody = `<p>Total Coverage: <code>${coveragePercentage}</code></p>
-    <details><summary>Coverage report</summary>
-    <p>
-    <pre>${codeCoverage}</pre>
-    </p>
-    </details>`;
-
-  await octokit.issues.createComment({
-    repo: repoName,
-    owner: repoOwner,
-    body: commentBody,
-    issue_number: prNumber,
-  });
-*/
-}
-run().catch((err) => core.setFailed(err.message));
