@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 
 async function run() {
   const badgeFilePath = core.getInput('create-file');
+  //const badgeFilePath = core.getInput('create-file-path');
   const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
 
   await exec.exec(testCommand);

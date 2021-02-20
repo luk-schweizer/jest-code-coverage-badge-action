@@ -4,6 +4,9 @@ inputs:
   repo-token:
     description: 'Github Token'
     required: true
+  create-file:
+    description: 'If present will create a badge in the specific path'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
