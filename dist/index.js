@@ -42,7 +42,7 @@ async function run() {
         repo: repoName,
         path: '.coverage/badge.svg',
         message: `Code Coverage Badge for Build number `,
-        content: badgeContent,
+        content: badgeContent.toString('base64'),
         branch: ref
     }
   );
