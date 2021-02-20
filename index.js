@@ -25,7 +25,15 @@ async function run() {
   //const prNumber = commitPRs.data[0].number;
   //console.log(prNumber);
 
-  const url = 'https://img.shields.io/badge/coverage-90-green'
+  const existingBadge = await octokit.repos.getContent({
+    owner: repoOwner,
+    repo: repoName,
+    path: '.coverage/badge.svg',
+    ref: ref
+  });
+
+  const sha = existingBadge.sha;
+  const url = 'https://img.shields.io/badge/coverage-90-green';
   const response = await fetch(url);
   const badgeContent = await response.buffer();
 
@@ -36,7 +44,8 @@ async function run() {
         path: '.coverage/badge.svg',
         message: `Code Coverage Badge for Build number `,
         content: badgeContent.toString('base64'),
-        branch: ref
+        branch: ref,
+        sha: sha
     }
   );
 
