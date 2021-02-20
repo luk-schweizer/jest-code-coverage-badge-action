@@ -32,7 +32,7 @@ async function run() {
     ref: ref
   });
    console.log(existingBadge);
-  const sha = existingBadge.sha;
+  const sha = (existingBadge.data) ? existingBadge.data.sha : null;
   const url = 'https://img.shields.io/badge/coverage-90-green';
   const response = await fetch(url);
   const badgeContent = await response.buffer();
