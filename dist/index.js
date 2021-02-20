@@ -31,21 +31,27 @@ async function run() {
 
   //const prNumber = commitPRs.data[0].number;
   //console.log(prNumber);
-
-  const existingBadge = await octokit.repos.getContent({
+  const existingBadge = null;
+  const sha = null;
+try{
+  existingBadge = await octokit.repos.getContent({
     owner: repoOwner,
     repo: repoName,
     path: '.coverage/badge.svg',
     ref: ref
   });
-   console.log(existingBadge);
-  const sha = (existingBadge.data) ? existingBadge.data.sha : null;
+
+  console.log(existingBadge);
+  sha = existingBadge.data.sha;
+} catch (e) {
+  console.log('badge not found');
+}
   const url = 'https://img.shields.io/badge/coverage-90-green';
   const response = await fetch(url);
   const badgeContent = await response.buffer();
   const badgeContentBase64 = badgeContent.toString('base64');
 
-  if (existingBadge.data && existingBadge.data.content !== badgeContentBase64) {
+  if (!existingBadge || existingBadge.data.content !== badgeContentBase64) {
     await octokit.repos.createOrUpdateFileContents(
         {
             owner: repoOwner,
