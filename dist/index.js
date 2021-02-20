@@ -38,7 +38,7 @@ async function run() {
     path: '.coverage/badge.svg',
     ref: ref
   });
-
+   console.log(existingBadge);
   const sha = existingBadge.sha;
   const url = 'https://img.shields.io/badge/coverage-90-green';
   const response = await fetch(url);
