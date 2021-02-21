@@ -40,12 +40,6 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
 
   const existingBadge = null;
   const sha = null;
-  console.log({
-                      owner: repoOwner,
-                      repo: repoName,
-                      path: badgeFilePath,
-                      ref: ref
-                    })
     try{
       existingBadge = await octokit.repos.getContent({
         owner: repoOwner,
@@ -66,12 +60,11 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
         let payload = {
                           owner: repoOwner,
                           repo: repoName,
-                          path: '.coverage/badge.svg',
+                          path: badgeFilePath,
                           message: `Code Coverage Badge for Run number ${github.run_id}-${github.run_number}`,
                           content: badgeContentBase64,
                           branch: ref,
-                          sha: sha,
-                      }
+                                                }
        if (sha) payload.sha = sha;
 
         await octokit.repos.createOrUpdateFileContents(payload);
