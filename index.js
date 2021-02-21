@@ -40,6 +40,12 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
 
   const existingBadge = null;
   const sha = null;
+  console.log({
+                      owner: repoOwner,
+                      repo: repoName,
+                      path: badgeFilePath,
+                      ref: ref
+                    })
     try{
       existingBadge = await octokit.repos.getContent({
         owner: repoOwner,
@@ -51,7 +57,7 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
       console.log(existingBadge);
       sha = existingBadge.data.sha;
     } catch (e) {
-      console.log('badge not found');
+      console.log('badge not found', e);
     }
 
       const response = await fetch(badgeUrl);
