@@ -70,6 +70,7 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
                           message: `Code Coverage Badge for Run number ${github.run_id}-${github.run_number}`,
                           content: badgeContentBase64,
                           branch: ref,
+                          sha: sha,
                       }
        if (sha) payload.sha = sha;
 
