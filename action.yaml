@@ -14,7 +14,8 @@ inputs:
   badge-color-configuration:
     description: 'Configuration for the badge colors depending on the code coverage percentage'
     required: false
-    default: [
+    default: |
+    [
       {
         color: 'red',
         greaterEqualsThan: 0,
