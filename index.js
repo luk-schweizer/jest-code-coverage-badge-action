@@ -38,10 +38,10 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
   const repoToken = core.getInput('repo-token');
   const octokit = github.getOctokit(repoToken);
 
-  console.log(context);
+  console.log('context', context);
 
-  const existingBadge = null;
-  const sha = null;
+  let existingBadge = null;
+  let sha = null;
     try{
       existingBadge = await octokit.repos.getContent({
         owner: repoOwner,

@@ -28,8 +28,8 @@ run().catch((err) => core.setFailed(err.message));
 
 const getCoverageData = () => {
     const data = fs.readFileSync('./coverage/coverage-summary.json');
-    return JSON.parse(data);
-    // coveragePercentage = parseFloat(coveragePercentage).toFixed(2);
+    const jsonData = JSON.parse(data);
+    return data.total.lines.pct;
 }
 
 const generateBadgeUrl = (coverageData) => {
@@ -45,8 +45,10 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
   const repoToken = core.getInput('repo-token');
   const octokit = github.getOctokit(repoToken);
 
-  const existingBadge = null;
-  const sha = null;
+  console.log('context', context);
+
+  let existingBadge = null;
+  let sha = null;
     try{
       existingBadge = await octokit.repos.getContent({
         owner: repoOwner,
@@ -68,7 +70,7 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
                           owner: repoOwner,
                           repo: repoName,
                           path: badgeFilePath,
-                          message: `Code Coverage Badge for Run number ${github.run_id}-${github.run_number}`,
+                          message: `Code Coverage Badge for Run number ${context.run_id}-${context.run_number}`,
                           content: badgeContentBase64,
                           branch: ref,
                                                 }
