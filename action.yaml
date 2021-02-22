@@ -14,7 +14,7 @@ inputs:
   badge-color-configuration:
     description: 'Configuration for the badge colors depending on the code coverage percentage'
     required: false
-    default: 'test'
+    default: "[{color: 'red', greaterEqualsThan: 0, lessThan: 30 }, {color: 'orange', greaterEqualsThan: 30, lessThan: 40 },{color: 'yellow', greaterEqualsThan: 40, lessThan: 60 },{color: 'yellowgreen', greaterEqualsThan: 60, lessThan: 75 },{color: 'green', greaterEqualsThan: 75, lessThan: 90 },{color: 'brightgreen', greaterEqualsThan: 90, lessEqualsThan: 100 }]"
 runs:
   using: 'node12'
   main: 'dist/index.js'
