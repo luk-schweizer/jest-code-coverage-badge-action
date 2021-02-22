@@ -16,36 +16,38 @@ async function run() {
   const testCommand = 'npx jest --coverage --coverageReporters="json-summary"';
 
   await exec.exec(testCommand);
-  const coverageData = getCoverageData();
-  const badgeUrl = generateBadgeUrl(coverageData);
+  const coverage = getCoverage();
+  const badgeUrl = generateBadgeUrl(coverage);
   if (badgeFilePath) {
-    await createOrUpdateBadgeFile(badgeFilePath, badgeUrl, coverageData);
+    await createOrUpdateBadgeFile(badgeFilePath, badgeUrl);
   }
   core.setOutput("BADGE_URL", badgeUrl);
 }
 
 run().catch((err) => core.setFailed(err.message));
 
-const getCoverageData = () => {
+const getCoverage = () => {
     const data = fs.readFileSync('./coverage/coverage-summary.json');
     const jsonData = JSON.parse(data);
     return jsonData.total.lines.pct;
 }
 
-const generateBadgeUrl = (coverageData) => {
-    const url = 'https://img.shields.io/badge/coverage-90-green';
-    return url;
+const generateBadgeUrl = (coverage) => {
+    const colorConfiguration = core.getInput('badge-color-configuration');
+    console.log(colorConfiguration);
+    const label = core.getInput('badge-label');
+    const availableColors = ['brightgreen', 'green', 'yellowgreen', 'yellow', 'orange', 'red'];
+    const color = 'green';
+    return `https://img.shields.io/badge/${label}-${coverage}%25-${color}`;
 }
 
-const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) => {
+const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl) => {
   const context = github.context;
   const repoName = context.repo.repo;
   const ref = context.ref;
   const repoOwner = context.repo.owner;
   const repoToken = core.getInput('repo-token');
   const octokit = github.getOctokit(repoToken);
-
-  console.log('context', context);
 
   let existingBadge = null;
   let sha = null;
@@ -70,7 +72,7 @@ const createOrUpdateBadgeFile = async (badgeFilePath, badgeUrl, coverageData) =>
                           owner: repoOwner,
                           repo: repoName,
                           path: badgeFilePath,
-                          message: `Code Coverage Badge for Run number ${context.run_id}-${context.run_number}`,
+                          message: `Code Coverage Badge for Run ${context.job}-${context.runId}-${context.runNumber}`,
                           content: badgeContentBase64,
                           branch: ref,
                                                 }
