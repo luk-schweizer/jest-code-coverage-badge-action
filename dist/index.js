@@ -34,6 +34,7 @@ const getCoverage = () => {
 
 const generateBadgeUrl = (coverage) => {
     const colorConfiguration = core.getInput('badge-color-configuration');
+    console.log(colorConfiguration);
     console.log(JSON.parse(colorConfiguration));
     const label = core.getInput('badge-label');
     const availableColors = ['brightgreen', 'green', 'yellowgreen', 'yellow', 'orange', 'red'];
