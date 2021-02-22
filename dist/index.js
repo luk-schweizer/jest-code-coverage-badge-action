@@ -29,7 +29,7 @@ run().catch((err) => core.setFailed(err.message));
 const getCoverageData = () => {
     const data = fs.readFileSync('./coverage/coverage-summary.json');
     const jsonData = JSON.parse(data);
-    return data.total.lines.pct;
+    return jsonData.total.lines.pct;
 }
 
 const generateBadgeUrl = (coverageData) => {
