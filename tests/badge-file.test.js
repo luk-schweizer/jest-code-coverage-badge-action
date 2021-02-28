@@ -28,12 +28,12 @@ beforeEach(() => {
 test('createOrUpdate should call createOrUpdate files in github with sha null in payload when badge does not exists in github repo', async () => {
   octokit.repos.getContent = jest.fn().mockResolvedValue({data: {sha: null}});
 
-  await BadgeFile.createOrUpdate('./coverage/badge.svg', 'http://url.to.get.badge.contents');
+  await BadgeFile.createOrUpdate('coverage/badge.svg', 'http://url.to.get.badge.contents');
 
   const expectedPayload = {
     owner: 'owner',
     repo: 'repository',
-    path: './coverage/badge.svg',
+    path: 'coverage/badge.svg',
     message: `Code Coverage Badge for Run job-runId-runNumber`,
     content: 'buffer',
     branch: 'reference',
@@ -47,12 +47,12 @@ test('createOrUpdate should call createOrUpdate files in github with sha null in
 test('createOrUpdate should call createOrUpdate files in github with sha not null in payload when badge does exists in github repo', async () => {
   octokit.repos.getContent = jest.fn().mockResolvedValue({data: {sha: 'shaOfExistingBadge'}});
 
-  await BadgeFile.createOrUpdate('./coverage/badge.svg', 'http://url.to.get.badge.contents');
+  await BadgeFile.createOrUpdate('coverage/badge.svg', 'http://url.to.get.badge.contents');
 
   const expectedPayload = {
     owner: 'owner',
     repo: 'repository',
-    path: './coverage/badge.svg',
+    path: 'coverage/badge.svg',
     message: `Code Coverage Badge for Run job-runId-runNumber`,
     content: 'buffer',
     branch: 'reference',
@@ -67,7 +67,7 @@ test('createOrUpdate should call createOrUpdate files in github with sha not nul
 test('createOrUpdate should call createOrUpdate files in github with file content taken from value in param badgeUrl', async () => {
   octokit.repos.getContent = jest.fn().mockResolvedValue({data: {sha: 'shaOfExistingBadge'}});
 
-  await BadgeFile.createOrUpdate('./coverage/badge.svg', 'http://url.to.get.badge.contents');
+  await BadgeFile.createOrUpdate('coverage/badge.svg', 'http://url.to.get.badge.contents');
 
   expect(fetch).toHaveBeenCalledTimes(1);
   expect(fetch).toHaveBeenCalledWith('http://url.to.get.badge.contents');
