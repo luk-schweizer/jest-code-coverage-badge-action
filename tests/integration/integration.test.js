@@ -1,4 +1,5 @@
 const {Octokit} = require('@octokit/rest');
+const axios = require('axios');
 
 test('code-coverage-jest-action should create a commit with a message having the run info when it is manually run', async () => {
   const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
@@ -25,13 +26,23 @@ test('code-coverage-jest-action should create a commit with a message having the
     sha: refData.data.object.sha,
   });
 
+  const resultWorkflow = axios.post('https://api.github.com/repos/luk-schweizer/code-coverage-jest-action/actions/workflows/workflow-for-integration-test.yml/dispatches', {
+    ref: 'refs/heads/integration-branch-1614554285075',
+    password: varPassword,
+  },
+  {
+    headers: {
+      'Authorization': 'Bearer ' + process.env.GITHUB_TOKEN,
+      'Content-Type': 'application/json',
+    },
+  });
   // actions:read //actions:write
-  const resultWorkflow = await octokit.actions.createWorkflowDispatch({
+  /* const resultWorkflow = await octokit.actions.createWorkflowDispatch({
     owner: owner,
     repo: repository,
     workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
     ref: branchRef,
-  });
+  }); */
   console.log(resultWorkflow);
 
   // get run id.
