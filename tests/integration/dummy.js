@@ -1,3 +1,3 @@
 module.exports.run = () => {
-    return true;
-}
+  return true;
+};
