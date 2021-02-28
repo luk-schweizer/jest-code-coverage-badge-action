@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "ncc build index.js --license licenses.txt"
+    "build": "ncc build index.js --license licenses.txt",
+    "coverage": "jest --coverage --coverageThreshold='{\"global\":{\"statements\":70, \"branches\":70, \"functions\":70, \"lines\":70}}'",
+    "postinstall": "npx eslint ."
   },
   "repository": {
     "type": "git",
