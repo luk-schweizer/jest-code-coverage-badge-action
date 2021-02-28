@@ -1,15 +1,16 @@
 name: 'Workflow for Integration Test'
 
-on: workflow_dispatch
-  inputs:
-    create-file-path:
-      description: 'File path'
-      required: false
-      default: 'tests/integration/badge.svg'
-    test-command:
-      description: 'Test command'
-      required: false
-      default: 'npx jest --coverage integration/dummy.test.js'
+on:
+  workflow_dispatch:
+    inputs:
+      create-file-path:
+        description: 'File path'
+        required: false
+        default: 'tests/integration/badge.svg'
+      test-command:
+        description: 'Test command'
+        required: false
+        default: 'npx jest --coverage integration/dummy.test.js'
 
 jobs:
   build:
