@@ -37,15 +37,17 @@ test('code-coverage-jest-action should create a commit with a message having the
     owner: owner,
     repo: repository,
     workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
+    per_page: 1,
+    page: 1,
   });
-  // per_page: 1,
-  // page: 0,
 
+  console.log(runs.data.workflow_runs[0]);
   const runNumber = runs.data.workflow_runs[0].run_number;
   const runId = runs.data.workflow_runs[0].id;
   const status = runs.data.workflow_runs[0].status;
   const conclusion = runs.data.workflow_runs[0].conclusion;
   console.log(runNumber, runId, status, conclusion);
+  // 2 608730573 completed success
   // get first and runId.
   /* octokit.actions.getWorkflowRun({
   owner,
