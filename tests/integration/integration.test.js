@@ -9,12 +9,12 @@ test('code-coverage-jest-action should create a commit with a message having the
   const startTime = new Date().toISOString();
   const branchRef = `refs/heads/integration-branch-${Date.now()}`;
 
-   //get sha from ref: REPOSITORY_REF
-   const refData = await octokit.git.getRef({
-       owner: owner,
-       repo: repository,
-       ref: process.env.REPOSITORY_REF,
-       });
+  // get sha from ref: REPOSITORY_REF
+  const refData = await octokit.git.getRef({
+    owner: owner,
+    repo: repository,
+    ref: process.env.REPOSITORY_REF,
+  });
 
   console.log(refData);
 
