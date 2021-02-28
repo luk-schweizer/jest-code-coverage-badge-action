@@ -1,7 +1,7 @@
 const {Octokit} = require('@octokit/rest');
 
 test('code-coverage-jest-action should create a commit with a message having the run info when it is manually run', async () => {
-  const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
+  const octokit = new Octokit({auth: `token ${process.env.GITHUB_TOKEN}`});
 
   const githubRepoSplitted = process.env.GITHUB_REPOSITORY.split('/');
   const owner = githubRepoSplitted[0];
