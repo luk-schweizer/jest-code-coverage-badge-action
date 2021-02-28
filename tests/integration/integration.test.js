@@ -12,8 +12,9 @@ test('code-coverage-jest-action should create a commit with a message having the
   const refData = await octokit.git.getRef({
     owner: owner,
     repo: repository,
-    ref: process.env.REPOSITORY_REF,
+    ref: 'heads/dev',
   });
+  // process.env.REPOSITORY_REF
   console.log(refData);
 
   await octokit.git.createRef({
