@@ -27,7 +27,7 @@ test('code-coverage-jest-action should create a commit with a message having the
   const resultWorkflow = await octokit.actions.createWorkflowDispatch({
     owner: owner,
     repo: repository,
-    workflow_id: 'noexists',
+    workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
     ref: branchRef,
   });
   console.log(resultWorkflow);
