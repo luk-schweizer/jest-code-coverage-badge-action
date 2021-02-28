@@ -29,10 +29,6 @@ test('code-coverage-jest-action should create a commit with a message having the
     repo: repository,
     workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
     ref: branchRef,
-    inputs: {
-      'create-file-path': 'tests/integration/badge.svg',
-      'test-command': 'npx jest --coverage integration/dummy.test.js',
-    },
   });
   console.log(resultWorkflow);
 
