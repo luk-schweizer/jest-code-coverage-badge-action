@@ -28,7 +28,6 @@ test('code-coverage-jest-action should create a commit with a message having the
 
   const resultWorkflow = axios.post('https://api.github.com/repos/luk-schweizer/code-coverage-jest-action/actions/workflows/workflow-for-integration-test.yml/dispatches', {
     ref: 'refs/heads/integration-branch-1614554285075',
-    password: varPassword,
   },
   {
     headers: {
