@@ -1,46 +1,21 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 const exec = require('@actions/exec');
-const fs = require('fs');
+const BadgeFile = require('./badge-file');
+const BadgeUrl = require('./badge-url');
+const coverage = require('./coverage');
 
 async function run() {
-  const context = github.context;
-  const repoName = context.repo.repo;
-  const repoOwner = context.repo.owner;
-  const repoToken = core.getInput('repo-token');
-  const testCommand = 'npx jest --coverage --coverageReporters="json-summary" --config="./jest.config.json"';
-  const octokit = github.getOctokit(repoToken);
-
-
-  const commitPRs = await octokit.repos.listPullRequestsAssociatedWithCommit(
-      {
-        repo: repoName,
-        owner: repoOwner,
-        commit_sha: context.sha,
-      },
-  );
-
-  //const prNumber = commitPRs.data[0].number;
-  //console.log(prNumber);
-
+  const testCommand = core.getInput('test-command');
   await exec.exec(testCommand);
-  const coverageData = fs.readFileSync('./coverage/coverage-summary.json');
-  // coveragePercentage = parseFloat(coveragePercentage).toFixed(2);
-  console.log(JSON.parse(coverageData));
 
-  /* const commentBody = `<p>Total Coverage: <code>${coveragePercentage}</code></p>
-    <details><summary>Coverage report</summary>
-    <p>
-    <pre>${codeCoverage}</pre>
-    </p>
-    </details>`;
+  const coveragePercentage = await coverage.percentage('./coverage/clover.xml');
 
-  await octokit.issues.createComment({
-    repo: repoName,
-    owner: repoOwner,
-    body: commentBody,
-    issue_number: prNumber,
-  });
-*/
+  const badgeUrl = BadgeUrl.generateUrl(coveragePercentage);
+  const badgeFilePath = core.getInput('create-file-path');
+  if (badgeFilePath) {
+    await BadgeFile.createOrUpdate(badgeFilePath, badgeUrl);
+  }
+  core.setOutput('BADGE_URL', badgeUrl);
 }
+
 run().catch((err) => core.setFailed(err.message));

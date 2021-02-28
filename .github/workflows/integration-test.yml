@@ -2,22 +2,24 @@ name: 'Integration Test'
 
 on:
   schedule:
-    - cron:  '0 20 * * *'
+    - cron:  '30 20 * * *'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 15.x]
-
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: dev
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '15.x'
     - run: npm ci
     - run: npm run integration-test
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WORKFLOW_ID_FOR_TEST: 'workflow-for-integration-test.yml'
+        REPOSITORY_REF: 'refs/heads/dev'

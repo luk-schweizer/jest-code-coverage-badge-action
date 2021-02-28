@@ -1,17 +1,20 @@
 {
   "name": "code-coverage-jest-action",
   "version": "1.0.0",
-  "description": "",
+  "description": "Github Action responsible for collecting jest code coverage and creating an informative badge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build index.js --license licenses.txt"
+    "test": "jest",
+    "build": "ncc build index.js --license licenses.txt",
+    "coverage": "jest --coverage --testPathIgnorePatterns tests/integration/ --coverageThreshold='{\"global\":{\"statements\":70, \"branches\":70, \"functions\":70, \"lines\":70}}'",
+    "postinstall": "npx eslint .",
+    "integration-test": "jest integration/integration.test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/luk-schweizer/code-coverage-jest-action.git"
   },
-  "author": "",
+  "author": "Lucas Schweizer",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/luk-schweizer/code-coverage-jest-action/issues"
@@ -20,7 +23,11 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "@octokit/rest": "^18.3.0",
+    "jest": "^26.6.3",
+    "node-fetch": "^2.6.1",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.27.0",

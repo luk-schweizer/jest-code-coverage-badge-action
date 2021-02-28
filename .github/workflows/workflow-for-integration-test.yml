@@ -1,0 +1,33 @@
+name: 'Workflow for Integration Test'
+
+on:
+  workflow_dispatch:
+    inputs:
+      create-file-path:
+        description: 'File path'
+        required: false
+        default: 'tests/integration/badge.svg'
+      test-command:
+        description: 'Test command'
+        required: false
+        default: 'npx jest --coverage integration/dummy.test.js'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: '15.x'
+    - run: npm ci
+    - name: Badge Coverage
+      id: jest-coverage
+      uses: luk-schweizer/code-coverage-jest-action@dev
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        create-file-path: ${{ github.event.inputs.create-file-path }}
+        test-command: ${{ github.event.inputs.test-command }}
