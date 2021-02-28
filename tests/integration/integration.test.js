@@ -6,7 +6,7 @@ test('code-coverage-jest-action should create a commit with a message having the
   const owner = githubRepoSplitted[0];
   const repository = githubRepoSplitted[1];
   const startTime = new Date();
-  const TIMEOUT_IN_SECONDS = 60;
+  // const TIMEOUT_IN_SECONDS = 60;
 
   const branchRef = `refs/heads/integration-branch-${startTime.getTime()}`;
 
@@ -49,7 +49,7 @@ test('code-coverage-jest-action should create a commit with a message having the
   const status = runs.data.workflow_runs[0].status;
   const conclusion = runs.data.workflow_runs[0].conclusion;
   console.log(runNumber, runId, status, conclusion);
-  console.log(runs.data.workflow_runs[0].updated_at > startTime.toISOString())
+  console.log(runs.data.workflow_runs[0].updated_at > startTime.toISOString());
   // 2 608730573 completed success
   // get first and runId.
   /* octokit.actions.getWorkflowRun({
