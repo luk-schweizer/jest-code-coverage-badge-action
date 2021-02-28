@@ -15,7 +15,6 @@ test('code-coverage-jest-action should create a commit with a message having the
     ref: 'heads/dev',
   });
   // process.env.REPOSITORY_REF
-  console.log(refData);
 
   await octokit.git.createRef({
     owner: owner,
@@ -24,9 +23,8 @@ test('code-coverage-jest-action should create a commit with a message having the
     sha: refData.data.object.sha,
   });
 
-
   // actions:read //actions:write
-  await octokit.actions.createWorkflowDispatch({
+  const resultWorkflow = await octokit.actions.createWorkflowDispatch({
     owner: owner,
     repo: repository,
     workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
@@ -36,16 +34,16 @@ test('code-coverage-jest-action should create a commit with a message having the
       'test-command': 'npx jest --coverage integration/dummy.test.js',
     },
   });
-
+  console.log(resultWorkflow);
 
   // get run id.
   const runs = await octokit.actions.listWorkflowRuns({
     owner: owner,
     repo: repository,
     workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
-    per_page: 1,
-    page: 0,
   });
+  // per_page: 1,
+  // page: 0,
   console.log(runs);
 
   const runNumber = runs.workflow_runs[0].run_number;
