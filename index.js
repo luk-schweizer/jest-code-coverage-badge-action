@@ -1,8 +1,8 @@
 const core = require('@actions/core');
 const exec = require('@actions/exec');
-const BadgeFile = require('badge-file');
-const BadgeUrl = require('badge-url');
-const coverage = require('coverage');
+const BadgeFile = require('./badge-file');
+const BadgeUrl = require('./badge-url');
+const coverage = require('./coverage');
 
 async function run() {
   const testCommand = core.getInput('test-command');
