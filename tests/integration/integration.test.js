@@ -27,7 +27,7 @@ test('code-coverage-jest-action should create a commit with a message having the
   const resultWorkflow = await octokit.actions.createWorkflowDispatch({
     owner: owner,
     repo: repository,
-    workflow_id: process.env.WORKFLOW_ID_FOR_TEST,
+    workflow_id: 'noexists',
     ref: branchRef,
   });
   console.log(resultWorkflow);
@@ -40,12 +40,11 @@ test('code-coverage-jest-action should create a commit with a message having the
   });
   // per_page: 1,
   // page: 0,
-  console.log(runs);
 
-  const runNumber = runs.workflow_runs[0].run_number;
-  const runId = runs.workflow_runs[0].id;
-  const status = runs.workflow_runs[0].status;
-  const conclusion = runs.workflow_runs[0].conclusion;
+  const runNumber = runs.data.workflow_runs[0].run_number;
+  const runId = runs.data.workflow_runs[0].id;
+  const status = runs.data.workflow_runs[0].status;
+  const conclusion = runs.data.workflow_runs[0].conclusion;
   console.log(runNumber, runId, status, conclusion);
   // get first and runId.
   /* octokit.actions.getWorkflowRun({
