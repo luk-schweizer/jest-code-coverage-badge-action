@@ -34,7 +34,7 @@ test('createOrUpdate should call createOrUpdate files in github with sha null in
     owner: 'owner',
     repo: 'repository',
     path: 'coverage/badge.svg',
-    message: `Code Coverage Badge for Run job-runId-runNumber`,
+    message: 'Code Coverage Badge',
     content: 'buffer',
     branch: 'reference',
   };
@@ -53,7 +53,7 @@ test('createOrUpdate should call createOrUpdate files in github with sha not nul
     owner: 'owner',
     repo: 'repository',
     path: 'coverage/badge.svg',
-    message: `Code Coverage Badge for Run job-runId-runNumber`,
+    message: 'Code Coverage Badge',
     content: 'buffer',
     branch: 'reference',
     sha: 'shaOfExistingBadge',

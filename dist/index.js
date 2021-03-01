@@ -24,7 +24,7 @@ module.exports.createOrUpdate = async (badgeFilePath, badgeUrl) => {
     owner: repoOwner,
     repo: repoName,
     path: badgeFilePath,
-    message: `Code Coverage Badge for Run ${context.job}-${context.runId}-${context.runNumber}`,
+    message: 'Code Coverage Badge',
     content: badgeContentInBase64,
     branch: ref,
   };
