@@ -21,14 +21,14 @@ jobs:
         script: |
           const integrationBranchName = `refs/heads/integration-branch-${Date.now()}`
           core.setOutput('GITHUB_INTEGRATION_BRANCH', integrationBranchName);
-
-          const refData = await github.repository.getRef({
+          console.log(github);
+          const refData = await github.getRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: 'heads/dev',
             });
-
-          await github.repository.createRef({
+          console.log(refData);
+          await github.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
             ref: integrationBranchName,
