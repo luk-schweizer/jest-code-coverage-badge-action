@@ -21,18 +21,17 @@ jobs:
         script: |
           const integrationBranchName = `refs/heads/integration-branch-${Date.now()}`
           core.setOutput('GITHUB_INTEGRATION_BRANCH', integrationBranchName);
-          console.log(github);
-          const refData = await github.getRef({
+          const reference = await github.git.getRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: 'heads/dev',
             });
-          console.log(refData);
-          await github.createRef({
+          console.log(reference);
+          await github.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
             ref: integrationBranchName,
-            sha: refData.data.object.sha,
+            sha: reference.data.object.sha,
           })
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
