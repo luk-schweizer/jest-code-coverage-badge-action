@@ -14,5 +14,7 @@ test('code-coverage-jest-action should create a commit with a message having the
   });
   expect(commits.data).not.toBe(null);
   expect(commits.data.length).toBe(1);
-  expect(commits.data[0].commit.message).toBe(`Code Coverage Badge for Run ${process.env.JOB_NAME}-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_NUMBER}`);
+  const expectedMessage = `Code Coverage Badge for Run
+    ${process.env.JOB_NAME}-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_NUMBER}`;
+  expect(commits.data[0].commit.message).toBe(expectedMessage);
 });
