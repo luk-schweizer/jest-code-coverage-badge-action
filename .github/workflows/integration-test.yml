@@ -42,3 +42,19 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_INTEGRATION_BRANCH: ${{ steps.create-branch.outputs.GITHUB_INTEGRATION_BRANCH }}
+        BADGE_PATH: 'tests/integration/badge.svg'
+    - name: Badge Coverage
+      id: jest-coverage
+      uses: luk-schweizer/code-coverage-jest-action@dev
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        create-file-path: 'tests/integration/badge.svg'
+        test-command: 'npx jest --coverage integration/dummy.test.js'
+    - uses: actions/github-script@v3
+      id: delete-branch
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        github-integration-branch: ${{ steps.create-branch.outputs.GITHUB_INTEGRATION_BRANCH }}
+        script: |
+          console.log(core.getInput('github-integration-branch'));
+          console.log(${{ steps.create-branch.outputs.GITHUB_INTEGRATION_BRANCH }});
