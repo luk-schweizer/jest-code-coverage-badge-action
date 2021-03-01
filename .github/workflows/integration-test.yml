@@ -52,6 +52,7 @@ jobs:
         BADGE_PATH: 'tests/integration/badge.svg'
         JOB_NAME: 'build'
     - uses: actions/github-script@v3
+      if: ${{ always() }}
       id: delete-branch
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
