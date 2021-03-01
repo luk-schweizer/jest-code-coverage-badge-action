@@ -14,8 +14,9 @@ test('code-coverage-jest-action should create a commit with a message having the
     path: 'tests/integration/badge.svg',
     sha: process.env.GITHUB_INTEGRATION_BRANCH,
   });
-
-  console.log(commits);
+  expect(commits.data).not.toBe(null);
+  expect(commits.data.length).toBe(1);
+  console.log(commits.data[0].commit);
 
   // expect(octokit.repos.getContent).toHaveBeenCalledTimes(1);
   // expect(octokit.repos.createOrUpdateFileContents).toHaveBeenCalledTimes(1);
