@@ -50,6 +50,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_INTEGRATION_BRANCH: ${{ steps.create-branch.outputs.GITHUB_INTEGRATION_BRANCH }}
         BADGE_PATH: 'tests/integration/badge.svg'
+        JOB_NAME: 'build'
     - uses: actions/github-script@v3
       id: delete-branch
       with:
