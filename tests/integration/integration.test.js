@@ -1,5 +1,4 @@
 const {Octokit} = require('@octokit/rest');
-const axios = require('axios');
 
 test('code-coverage-jest-action should create a commit with a message having the run info when it is manually run', async () => {
   const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
@@ -14,7 +13,7 @@ test('code-coverage-jest-action should create a commit with a message having the
     repo: repository,
     path: 'tests/integration/badge.svg',
     sha: process.env.GITHUB_INTEGRATION_BRANCH,
- });
+  });
 
   console.log(commits);
 
