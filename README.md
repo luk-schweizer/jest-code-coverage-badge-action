@@ -1,7 +1,7 @@
 # jest-code-coverage-badge-action
 [![build](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
 [![coverage](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/c6bd776f/coverage)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
-[![Integration Test](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml)
+[![integration test](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml)
 
 This is a [Github Action](https://github.com/features/actions) that will collect [Jest](https://jestjs.io) code coverage and create an informative badge using [Shields](https://shields.io).
 
