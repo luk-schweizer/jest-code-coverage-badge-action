@@ -1,7 +1,8 @@
 # jest-code-coverage-badge-action
 [![build](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
-[![coverage](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/c6bd776f/coverage)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
 [![integration test](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml)
+[![coverage](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/c6bd776f/coverage)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/luk-schweizer/jest-code-coverage-badge-action)
 
 This is a [Github Action](https://github.com/features/actions) that will collect [Jest](https://jestjs.io) code coverage and create an informative badge using [Shields](https://shields.io).
 
@@ -59,7 +60,7 @@ The URL of the generated badge.
     ```
 2) Add the following into your github workflow, using the output from **1)**.
     ```yaml
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
     with:
      kvaas-key-url: 'https://api.keyvalue.xyz/55b0216d/coverage'
     ```
@@ -88,19 +89,19 @@ Multiple badges can be generated with different coverage percentage.You will nee
 - Workflow:
     ```yaml
   - name: Statements Badge Coverage
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
     with:
       coverage-type: statements
       badge-label: statements 
       kvaas-key-url: 'https://api.keyvalue.xyz/b78465cf/coverage'
   - name: Conditionals Badge Coverage
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
     with:
       coverage-type: conditionals
       badge-label: conditionals
       kvaas-key-url: 'https://api.keyvalue.xyz/3d07498c/coverage'
   - name: Methods Badge Coverage
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
     with:
       coverage-type: methods
       badge-label: methods
