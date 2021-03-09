@@ -1,4 +1,4 @@
-# Jest Code Coverage Badge Action
+# Jest Code Coverage Badge
 [![build](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
 [![integration test](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml)
 [![coverage](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/c6bd776f/coverage)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)

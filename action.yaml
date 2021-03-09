@@ -1,4 +1,4 @@
-name: 'Jest Code Coverage Badge Generator'
+name: 'Jest Code Coverage Badge'
 description: 'Collecting jest code coverage and creates an informative badge for readme files.'
 inputs:
   test-command:
