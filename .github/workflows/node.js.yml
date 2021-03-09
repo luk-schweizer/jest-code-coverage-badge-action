@@ -22,9 +22,8 @@ jobs:
       if: ${{ matrix.node-version != '15.x'}}
     - name: Badge Coverage
       id: jest-coverage
-      uses: luk-schweizer/code-coverage-jest-action@dev
+      uses: luk-schweizer/jest-code-coverage-badge-action@dev
       if: ${{ matrix.node-version == '15.x'}}
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        create-file-path: 'coverage/badge.svg'
+        kvaas-key-url: 'https://api.keyvalue.xyz/b78465cf/coverage'
         test-command: 'npm run coverage'

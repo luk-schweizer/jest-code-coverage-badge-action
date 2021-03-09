@@ -1,14 +1,19 @@
-const core = require('@actions/core');
+module.exports.schema = (coveragePercentage, label, colorConfiguration, showJestLogo) => {
+  let color = getColor(colorConfiguration, coveragePercentage);
 
-module.exports.generateUrl = (coverage) => {
-  const colorConfiguration = core.getInput('badge-color-configuration');
-  const label = core.getInput('badge-label');
+  if (!color) color = 'blue';
 
-  let color = getColor(JSON.parse(colorConfiguration), coverage);
-  if (!color) {
-    color = 'blue';
-  }
-  return encodeURI(`https://img.shields.io/badge/${label}-${coverage}%-${color}`);
+  const schema = {
+    schemaVersion: 1,
+    label: label,
+    message: `${coveragePercentage}%`,
+    color: color,
+    style: 'plastic',
+  };
+
+  if (showJestLogo) schema.logoSvg = 'jest';
+
+  return schema;
 };
 
 const getColor = (colorConfiguration, coverage) => {

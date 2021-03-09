@@ -1,5 +1,5 @@
 {
-  "name": "code-coverage-jest-action",
+  "name": "jest-code-coverage-badge-action",
   "version": "1.0.0",
   "description": "Github Action responsible for collecting jest code coverage and creating an informative badge",
   "main": "index.js",
@@ -12,19 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luk-schweizer/code-coverage-jest-action.git"
+    "url": "git+https://github.com/luk-schweizer/jest-code-coverage-badge-action.git"
   },
   "author": "Lucas Schweizer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/luk-schweizer/code-coverage-jest-action/issues"
+    "url": "https://github.com/luk-schweizer/jest-code-coverage-badge-action/issues"
   },
-  "homepage": "https://github.com/luk-schweizer/code-coverage-jest-action#readme",
+  "homepage": "https://github.com/luk-schweizer/jest-code-coverage-badge-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^4.0.0",
-    "@octokit/rest": "^18.3.0",
     "node-fetch": "^2.6.1",
     "xml2js": "^0.4.23"
   },

@@ -1,21 +1,23 @@
-const {Octokit} = require('@octokit/rest');
+const fetch = require('node-fetch');
 
-test('code-coverage-jest-action should create a commit with a message having the run info when it is manually run', async () => {
-  const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
-  const githubRepoSplit = process.env.GITHUB_REPOSITORY.split('/');
-  const owner = githubRepoSplit[0];
-  const repository = githubRepoSplit[1];
+test('jest-code-coverage-badge-action output should return an svg badge with label coverage and value 100% when input label is coverage, coverage of test are 100% and key url is not provided', async () => {
+  const outputUrl = process.env.BADGE_OUTPUT_WITH_URL_NOT_PROVIDED;
 
-  const commits = await octokit.repos.listCommits({
-    owner: owner,
-    repo: repository,
-    path: process.env.BADGE_PATH,
-    sha: process.env.GITHUB_INTEGRATION_BRANCH,
-  });
-  expect(commits.data).not.toBe(null);
-  expect(commits.data.length).toBe(1);
+  const response = await fetch(outputUrl, {method: 'get'});
+  const svg = await response.text();
 
-  const expectedMessage = 'Code Coverage Badge';
+  expect(svg).toMatch(/^<svg/);
+  expect(svg).toMatch(/<text[^>]*>coverage<\/text>/);
+  expect(svg).toMatch(/<text[^>]*>100%<\/text>/);
+});
 
-  expect(commits.data[0].commit.message).toBe(expectedMessage);
+test('jest-code-coverage-badge-action output should return an svg badge with label coverage and value 100% when input label is coverageWithUrlProvided, coverage of test are 100% and key url is provided', async () => {
+  const outputUrl = process.env.BADGE_OUTPUT_WITH_URL_PROVIDED;
+
+  const response = await fetch(outputUrl, {method: 'get'});
+  const svg = await response.text();
+
+  expect(svg).toMatch(/^<svg/);
+  expect(svg).toMatch(/<text[^>]*>coverageWithUrlProvided<\/text>/);
+  expect(svg).toMatch(/<text[^>]*>100%<\/text>/);
 });
