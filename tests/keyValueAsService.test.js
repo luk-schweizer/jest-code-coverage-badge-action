@@ -64,7 +64,6 @@ test('putCoverageValue should post to url the objectValue', async () => {
     'label': 'coverage',
     'message': '80%',
     'color': 'green',
-    'style': 'plastic',
     'namedLogo': 'jest',
   };
 
