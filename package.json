@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "ncc build index.js --license licenses.txt",
-    "coverage": "jest --coverage --testPathIgnorePatterns tests/integration/ --coverageThreshold='{\"global\":{\"statements\":70, \"branches\":70, \"functions\":70, \"lines\":70}}'",
+    "coverage": "jest --coverage --testPathIgnorePatterns tests/integration/ --collectCoverageFrom='**/*.js' --collectCoverageFrom='!dist/**/*.js' --collectCoverageFrom='!coverage/**/*.js' --collectCoverageFrom='!tests/integration/**/*.js' --coverageThreshold='{\"global\":{\"statements\":70, \"branches\":70, \"functions\":70, \"lines\":70}}'",
     "postinstall": "npx eslint .",
     "integration-test": "jest integration/integration.test.js"
   },
