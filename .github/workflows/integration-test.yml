@@ -12,54 +12,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: dev
-    - uses: actions/github-script@v3
-      id: create-branch
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          const integrationBranchName = `integration-branch-${Date.now()}`
-          core.setOutput('GITHUB_INTEGRATION_BRANCH', integrationBranchName);
-          const reference = await github.git.getRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'heads/dev',
-            });
-          console.log(reference);
-          await github.git.createRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: `refs/heads/${integrationBranchName}`,
-            sha: reference.data.object.sha,
-          })
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: '15.x'
     - run: npm ci
-    - name: Badge Coverage
-      id: jest-coverage
-      uses: luk-schweizer/code-coverage-jest-action@dev
+    - name: Badge Coverage With Provided Url
+      id: jest-coverage-with-url
+      uses: luk-schweizer/jest-code-coverage-badge-action@main
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        create-file-path: 'tests/integration/badge.svg'
+        kvaas-key-url: 'https://api.keyvalue.xyz/7732e373/coverage'
+        badge-label: 'coverageWithUrlProvided'
         test-command: 'npx jest --coverage integration/dummy.test.js'
+    - run: echo "${{ steps.jest-coverage-with-url.outputs.BADGE_URL }}"
+    - name: Badge Coverage With No Provided Url
+      id: jest-coverage-without-url
+      uses: luk-schweizer/jest-code-coverage-badge-action@main
+      with:
+        test-command: 'npx jest --coverage integration/dummy.test.js'
+    - run: echo "${{ steps.jest-coverage-without-url.outputs.BADGE_URL }}"
     - run: npm run integration-test
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_INTEGRATION_BRANCH: ${{ steps.create-branch.outputs.GITHUB_INTEGRATION_BRANCH }}
-        BADGE_PATH: 'tests/integration/badge.svg'
-        JOB_NAME: 'build'
-    - uses: actions/github-script@v3
-      if: ${{ always() }}
-      id: delete-branch
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        github-integration-branch: ${{ steps.create-branch.outputs.GITHUB_INTEGRATION_BRANCH }}
-        script: |
-          await github.git.deleteRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: `heads/${core.getInput('github-integration-branch')}`,
-          })
+        BADGE_OUTPUT_WITH_URL_PROVIDED: ${{ steps.jest-coverage-with-url.outputs.BADGE_URL }}
+        BADGE_OUTPUT_WITH_URL_NOT_PROVIDED: ${{ steps.jest-coverage-without-url.outputs.BADGE_URL }}

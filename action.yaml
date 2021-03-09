@@ -2,27 +2,28 @@ name: 'Badge Coverage Generator'
 description: 'Badge Coverage Generator'
 inputs:
   test-command:
-    description: 'Command that will execute and collect test coverage data. Should include --coverage option.'
+    description: 'Command that will execute and collect test coverage data. Should include --coverage option'
     required: false
     default: 'npx jest --coverage'
   coverage-type:
-    description: 'Coverage type to be gathered. Valid options are: statements, methods or conditionals.'
+    description: 'Coverage type to be gathered. Valid options are: statements, methods or conditionals'
     required: false
     default: statements
-  create-file-path:
-    description: 'If present will create a badge in the specific path. Relative path to root project folder should be specified.'
-    required: false
-  repo-token:
-    description: 'Github Token. Should be present if create-file-path input is specified.'
-    required: false
   badge-label:
-    description: 'Label for the badge.'
+    description: 'Label for the badge'
     required: false
     default: coverage
+  badge-logo:
+    description: 'Show jest logo'
+    required: false
+    default: true
   badge-color-configuration:
-    description: 'Configuration for the badge colors depending on the code coverage percentage.'
+    description: 'Configuration for the badge colors depending on the code coverage percentage'
     required: false
     default: '[{"color": "red", ">=": 0, "<": 30 }, {"color": "orange", ">=": 30, "<": 40 },{"color": "yellow", ">=": 40, "<": 60 },{"color": "yellowgreen", ">=": 60, "<": 70 },{"color": "green", ">=": 70, "<": 90 },{"color": "brightgreen", ">=": 90, "<=": 100 }]'
+  kvaas-key-url:
+    description: 'KVaaS key url where to post coverage values. If not present the action will generate a new url. More info in https://keyvalue.xyz'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

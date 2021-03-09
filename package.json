@@ -1,30 +1,28 @@
 {
-  "name": "code-coverage-jest-action",
+  "name": "jest-code-coverage-badge-action",
   "version": "1.0.0",
   "description": "Github Action responsible for collecting jest code coverage and creating an informative badge",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "ncc build index.js --license licenses.txt",
-    "coverage": "jest --coverage --testPathIgnorePatterns tests/integration/ --coverageThreshold='{\"global\":{\"statements\":70, \"branches\":70, \"functions\":70, \"lines\":70}}'",
+    "coverage": "jest --coverage --testPathIgnorePatterns tests/integration/ --collectCoverageFrom='**/*.js' --collectCoverageFrom='!dist/**/*.js' --collectCoverageFrom='!coverage/**/*.js' --collectCoverageFrom='!tests/integration/**/*.js' --coverageThreshold='{\"global\":{\"statements\":70, \"branches\":70, \"functions\":70, \"lines\":70}}'",
     "postinstall": "npx eslint .",
     "integration-test": "jest integration/integration.test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luk-schweizer/code-coverage-jest-action.git"
+    "url": "git+https://github.com/luk-schweizer/jest-code-coverage-badge-action.git"
   },
   "author": "Lucas Schweizer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/luk-schweizer/code-coverage-jest-action/issues"
+    "url": "https://github.com/luk-schweizer/jest-code-coverage-badge-action/issues"
   },
-  "homepage": "https://github.com/luk-schweizer/code-coverage-jest-action#readme",
+  "homepage": "https://github.com/luk-schweizer/jest-code-coverage-badge-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^4.0.0",
-    "@octokit/rest": "^18.3.0",
     "node-fetch": "^2.6.1",
     "xml2js": "^0.4.23"
   },
