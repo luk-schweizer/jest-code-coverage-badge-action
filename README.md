@@ -1,6 +1,7 @@
 # jest-code-coverage-badge-action
 [![build](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
 [![coverage](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/c6bd776f/coverage)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/node.js.yml)
+[![Integration Test](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml/badge.svg?branch=main)](https://github.com/luk-schweizer/jest-code-coverage-badge-action/actions/workflows/integration-test.yml)
 
 This is a [Github Action](https://github.com/features/actions) that will collect [Jest](https://jestjs.io) code coverage and create an informative badge using [Shields](https://shields.io).
 
@@ -80,9 +81,9 @@ More information in [https://img.shields.io/endpoint/](https://img.shields.io/en
 
 #### 2. Multiple badges
 Multiple badges can be generated with different coverage percentage.You will need to follow the [How to use](#how-to-use) section for each badge. For example: <br/>
-![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/b78465cf/coverage)
-![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/3d07498c/coverage)
-![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/0488b6f2/coverage)
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/b78465cf/coverage&style=plastic)
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/3d07498c/coverage&style=plastic)
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/0488b6f2/coverage&style=plastic)
 
 - Workflow:
     ```yaml
@@ -107,7 +108,7 @@ Multiple badges can be generated with different coverage percentage.You will nee
     ```
 - Readme:
 ```markdown
-![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/b78465cf/coverage)
-![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/3d07498c/coverage)
-![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/0488b6f2/coverage)
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/b78465cf/coverage&style=plastic)
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/3d07498c/coverage&style=plastic)
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/0488b6f2/coverage&style=plastic)
 ```
