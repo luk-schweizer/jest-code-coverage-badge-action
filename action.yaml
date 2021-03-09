@@ -6,7 +6,7 @@ inputs:
     required: false
     default: 'npx jest --coverage'
   coverage-type:
-    description: 'Coverage type to be gathered. Valid options are: statements, methods or conditionals.'
+    description: 'Coverage type to be gathered. Valid options are: statements, methods or conditionals'
     required: false
     default: statements
   badge-label:

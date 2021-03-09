@@ -12,8 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: dev
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -21,7 +19,7 @@ jobs:
     - run: npm ci
     - name: Badge Coverage With Provided Url
       id: jest-coverage-with-url
-      uses: luk-schweizer/jest-code-coverage-badge-action@dev
+      uses: luk-schweizer/jest-code-coverage-badge-action@main
       with:
         kvaas-key-url: 'https://api.keyvalue.xyz/7732e373/coverage'
         badge-label: 'coverageWithUrlProvided'
@@ -29,7 +27,7 @@ jobs:
     - run: echo "${{ steps.jest-coverage-with-url.outputs.BADGE_URL }}"
     - name: Badge Coverage With No Provided Url
       id: jest-coverage-without-url
-      uses: luk-schweizer/jest-code-coverage-badge-action@dev
+      uses: luk-schweizer/jest-code-coverage-badge-action@main
       with:
         test-command: 'npx jest --coverage integration/dummy.test.js'
     - run: echo "${{ steps.jest-coverage-without-url.outputs.BADGE_URL }}"

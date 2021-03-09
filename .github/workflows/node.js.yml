@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -22,9 +22,9 @@ jobs:
       if: ${{ matrix.node-version != '15.x'}}
     - name: Badge Coverage
       id: jest-coverage
-      uses: luk-schweizer/jest-code-coverage-badge-action@dev
+      uses: luk-schweizer/jest-code-coverage-badge-action@main
       if: ${{ matrix.node-version == '15.x'}}
       with:
-        kvaas-key-url: 'https://api.keyvalue.xyz/b78465cf/coverage'
+        kvaas-key-url: 'https://api.keyvalue.xyz/c6bd776f/coverage'
         test-command: 'npm run coverage'
     - run: echo "${{ steps.jest-coverage.outputs.BADGE_URL }}"
