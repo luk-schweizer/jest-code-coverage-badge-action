@@ -31,7 +31,7 @@ const getKeyValueAsServiceUrl = async () => {
     return await keyValueAsService.createNewUrl();
   }
 
-  if (!keyValueAsService.isValidKeyUrl(kvaasKeyUrl)) throw new Error('Input kvaas-key-url is not valid');
+  if (!keyValueAsService.isUrlValid(kvaasKeyUrl)) throw new Error('Input kvaas-key-url is not valid');
   return kvaasKeyUrl;
 };
 

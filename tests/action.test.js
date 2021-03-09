@@ -17,7 +17,7 @@ beforeEach(() => {
 
 test('run should execute command "npm jest --coverage" when test-command input is "npm jest --coverage"', async () => {
   coverage.isValidType = jest.fn(() => true);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => true);
+  keyValueAsService.isUrlValid = jest.fn(() => true);
 
   core.getInput = jest.fn((input) => {
     switch (input) {
@@ -42,7 +42,7 @@ test('run should execute command "npm jest --coverage" when test-command input i
 
 test('run should call coverage.percentage with path ./coverage/clover.xml and coverageType statements when coverage-type input is statements', async () => {
   coverage.isValidType = jest.fn(() => true);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => true);
+  keyValueAsService.isUrlValid = jest.fn(() => true);
 
   core.getInput = jest.fn((input) => {
     switch (input) {
@@ -77,7 +77,7 @@ test('run should throw error when coverageType is not valid', async () => {
 test('run should call badge.schema with coveragePercentage 10, label coverage, colorConfiguration [{color: "green"}] and showJestLogo true when coverage.percentage returns 10, badge-label input is coverage,  badge-color-configuration input is [{"color": "green"}], badge-logo input is true', async () => {
   coverage.isValidType = jest.fn(() => true);
   coverage.percentage.mockResolvedValue(10);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => true);
+  keyValueAsService.isUrlValid = jest.fn(() => true);
 
   core.getInput = jest.fn((input) => {
     switch (input) {
@@ -104,7 +104,7 @@ test('run should call badge.schema with coveragePercentage 10, label coverage, c
 
 test('run should call keyValueAsService.createNewUrl when kvaas-key-url input is null', async () => {
   coverage.isValidType = jest.fn(() => true);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => true);
+  keyValueAsService.isUrlValid = jest.fn(() => true);
 
   core.getInput = jest.fn((input) => {
     switch (input) {
@@ -127,7 +127,7 @@ test('run should call keyValueAsService.createNewUrl when kvaas-key-url input is
 
 test('run should throw error when kvaas-key-url input is not valid', async () => {
   coverage.isValidType = jest.fn(() => true);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => false);
+  keyValueAsService.isUrlValid = jest.fn(() => false);
   try {
     await action.run();
   } catch (e) {
@@ -138,7 +138,7 @@ test('run should throw error when kvaas-key-url input is not valid', async () =>
 
 test('run should call keyValueAsService.setKeyValue with "url" and {schema:1} when kvaas-key-url input is "url" and valid, and badge.schema returns {schema:1}', async () => {
   coverage.isValidType = jest.fn(() => true);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => true);
+  keyValueAsService.isUrlValid = jest.fn(() => true);
   badge.schema = jest.fn(() => {
     return {schema: 1};
   });
@@ -166,7 +166,7 @@ test('run should call keyValueAsService.setKeyValue with "url" and {schema:1} wh
 
 test('run should call core.setOutput with https://img.shields.io/endpoint?url=url when kvaas-key-url input is "kvaasUrl" and valid', async () => {
   coverage.isValidType = jest.fn(() => true);
-  keyValueAsService.isValidKeyUrl = jest.fn(() => true);
+  keyValueAsService.isUrlValid = jest.fn(() => true);
 
   core.getInput = jest.fn((input) => {
     switch (input) {
