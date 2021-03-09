@@ -107,11 +107,11 @@ module.exports = {
     const total = parseInt(metrics[type]);
     const covered = parseInt(metrics[`covered${type}`]);
 
-    if (total == 0) return '0';
+    if (total == 0) return 0;
 
     const coverageRatio = covered/total;
 
-    return (coverageRatio*100).toFixed(2);
+    return parseFloat((coverageRatio*100).toFixed(2));
   },
 
 
