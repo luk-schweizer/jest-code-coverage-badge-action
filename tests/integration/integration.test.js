@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 
 test('jest-code-coverage-badge-action output should return an svg badge with label coverage and value 100% when input label is coverage, coverage of test are 100% and key url is not provided', async () => {
   const outputUrl = process.env.BADGE_OUTPUT_WITH_URL_NOT_PROVIDED;
+  console.log(`Url ${outputUrl}`);
 
   const response = await fetch(outputUrl, {method: 'get'});
   const svg = await response.text();
@@ -13,6 +14,7 @@ test('jest-code-coverage-badge-action output should return an svg badge with lab
 
 test('jest-code-coverage-badge-action output should return an svg badge with label coverage and value 100% when input label is coverageWithUrlProvided, coverage of test are 100% and key url is provided', async () => {
   const outputUrl = process.env.BADGE_OUTPUT_WITH_URL_PROVIDED;
+  console.log(`Url ${outputUrl}`);
 
   const response = await fetch(outputUrl, {method: 'get'});
   const svg = await response.text();
