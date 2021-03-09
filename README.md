@@ -15,6 +15,9 @@ This is a [Github Action](https://github.com/features/actions) that will collect
 - Code coverage parsed from [Clover XML report](https://istanbul.js.org/docs/advanced/alternative-reporters/#clover) default Jest coverage report.
 - Badge information stored in [Key/Value as a Service (KVaaS)](https://keyvalue.xyz) free cloud service. No registration required.
 
+**Note:** Badge information will be public available. Anyone who knows the url can edit it. Here is an example of the information being stored:``{"schemaVersion":1,"label":"coverage","message":"75.4.1%","color":"green","namedLogo":"jest"}``
+
+
 ### Inputs
 
 #### `test-command`
