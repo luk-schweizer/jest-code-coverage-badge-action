@@ -1,5 +1,5 @@
-name: 'Badge Coverage Generator'
-description: 'Badge Coverage Generator'
+name: 'Jest Code Coverage Badge'
+description: 'Collecting jest code coverage and creates an informative badge for readme files.'
 inputs:
   test-command:
     description: 'Command that will execute and collect test coverage data. Should include --coverage option'
