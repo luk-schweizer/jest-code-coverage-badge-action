@@ -27,3 +27,4 @@ jobs:
       with:
         kvaas-key-url: 'https://api.keyvalue.xyz/b78465cf/coverage'
         test-command: 'npm run coverage'
+    - run: echo "${{ steps.jest-coverage.outputs.BADGE_URL }}"

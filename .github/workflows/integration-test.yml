@@ -25,15 +25,15 @@ jobs:
       with:
         kvaas-key-url: 'https://api.keyvalue.xyz/7732e373/coverage'
         test-command: 'npx jest --coverage integration/dummy.test.js'
-    - run: echo "${{ steps.jest-coverage-with-url.BADGE_URL }}"
+    - run: echo "${{ steps.jest-coverage-with-url.outputs.BADGE_URL }}"
     - name: Badge Coverage With No Provided Url
       id: jest-coverage-without-url
       uses: luk-schweizer/jest-code-coverage-badge-action@dev
       with:
         badge-label: 'coverageWithUrlProvided'
         test-command: 'npx jest --coverage integration/dummy.test.js'
-    - run: echo "${{ steps.jest-coverage-without-url.BADGE_URL }}"
+    - run: echo "${{ steps.jest-coverage-without-url.outputs.BADGE_URL }}"
     - run: npm run integration-test
       env:
-        BADGE_OUTPUT_WITH_URL_PROVIDED: ${{ steps.jest-coverage-with-url.BADGE_URL }}
-        BADGE_OUTPUT_WITH_URL_NOT_PROVIDED: ${{ steps.jest-coverage-without-url.BADGE_URL }}
+        BADGE_OUTPUT_WITH_URL_PROVIDED: ${{ steps.jest-coverage-with-url.outputs.BADGE_URL }}
+        BADGE_OUTPUT_WITH_URL_NOT_PROVIDED: ${{ steps.jest-coverage-without-url.outputs.BADGE_URL }}
