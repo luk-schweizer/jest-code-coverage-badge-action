@@ -66,7 +66,6 @@ module.exports.schema = (coveragePercentage, label, colorConfiguration, showJest
     label: label,
     message: `${coveragePercentage}%`,
     color: color,
-    style: 'plastic',
   };
 
   if (showJestLogo) schema.namedLogo = 'jest';
