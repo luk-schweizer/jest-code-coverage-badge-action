@@ -14,9 +14,11 @@ This is a [Github Action](https://github.com/features/actions) that will collect
 - Customizable test command.
 - Code coverage parsed from [Clover XML report](https://istanbul.js.org/docs/advanced/alternative-reporters/#clover) default Jest coverage report.
 - Badge information stored in [Key/Value as a Service (KVaaS)](https://keyvalue.xyz) free cloud service. No registration required.
-
+<br/>
 **Note:** Badge information will be public available. Anyone who knows the url can edit it. Here is an example of the information being stored:``{"schemaVersion":1,"label":"coverage","message":"75.4.1%","color":"green","namedLogo":"jest"}``
 
+<br/>
+<br/>
 
 ### Inputs
 
@@ -50,6 +52,9 @@ KVaaS key url where to post coverage values. If not present the action will gene
 
 The URL of the generated badge.
 
+<br/>
+<br/>
+
 ## How to use
 
 1) Generate a new key KVaaS url to store your badge information.
@@ -71,10 +76,14 @@ The URL of the generated badge.
     ```markdown
     ![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/55b0216d/coverage)
     ```
-4) That's it! Badge will be automatically updated every time the workflow runs. 
-**Note:** It can take some minutes until the badge updates in github. This happens because github uploads and manage images through camo.githubusercontent and it can take some time to update the source. 
+4) That's it! 
+   Badge will be automatically updated every time the workflow runs. 
+**Note:** It can take some minutes until the badge updates in github. This happens because github uploads and manage images through camo proxy and it can take some time to update the source.
 
-## Use cases
+<br/>
+<br/>
+
+## Advanced use cases
 #### 1. Customize your badge with shields
 With shields endpoint you can override your badge with url parameters. For example, we can change the color, the label, the logo and the style: <br/>
 ![Custom badge](https://img.shields.io/endpoint?color=red&label=NewLabel&logo=github&logoColor=red&style=flat-square&url=https://api.keyvalue.xyz/b78465cf/coverage)
