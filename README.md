@@ -1,5 +1,7 @@
 # code-coverage-jest-action
 
+![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/b78465cf/coverage)
+
 This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
 
 ## Inputs
