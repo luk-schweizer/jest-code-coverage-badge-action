@@ -5,6 +5,30 @@ beforeEach(() => {
   jest.resetModules(); // Reset cache
 });
 
+test('isValidType should return true when type is statements', () => {
+  const result = coverage.isValidType('statements');
+
+  expect(result).toBe(true);
+});
+
+test('isValidType should return true when type is methods', () => {
+  const result = coverage.isValidType('methods');
+
+  expect(result).toBe(true);
+});
+
+test('isValidType should return true when type is conditionals', () => {
+  const result = coverage.isValidType('conditionals');
+
+  expect(result).toBe(true);
+});
+
+test('isValidType should return false when type is notrecognized', () => {
+  const result = coverage.isValidType('notrecognized');
+
+  expect(result).toBe(false);
+});
+
 test('percentage should return 85.19 when type is statements and clover.xml file has metrics with 108 statements and 92 coveredstatements', async () => {
   const result = await coverage.percentage('./tests/coverage/clover.xml', 'statements');
 

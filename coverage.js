@@ -4,7 +4,7 @@ const coverageTypes = ['statements', 'methods', 'conditionals'];
 
 module.exports = {
   isValidType: (type) => {
-    return !coverageTypes.includes(type);
+    return coverageTypes.includes(type);
   },
 
   percentage: async (filePath, type) => {
