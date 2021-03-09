@@ -146,7 +146,7 @@ module.exports = {
   createNewUrl: async () => {
     const response = await fetch(`${baseUrl}/new/coverage`, {method: 'post'});
     const url = await response.text();
-    return url;
+    return url.replace('\n','');
   },
 
   setKeyValue: async (url, objectValue) => {
