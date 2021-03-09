@@ -65,7 +65,7 @@ test('putCoverageValue should post to url the objectValue', async () => {
     'message': '80%',
     'color': 'green',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   await keyValueAsService.setKeyValue('url', objectValue);

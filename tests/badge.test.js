@@ -15,7 +15,7 @@ test('schema should return an object with label coverage, percentage 80 and colo
     'message': '80%',
     'color': 'green',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);
@@ -32,7 +32,7 @@ test('schema should return an object with label coveragepercentage, percentage 8
     'message': '81%',
     'color': 'red',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);
@@ -67,7 +67,7 @@ test('schema should return an object with label coverageWithDecimal, percentage 
     'message': '30.5%',
     'color': 'orange',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);
@@ -85,7 +85,7 @@ test('schema should return an object with label coverage, percentage 50 and colo
     'message': '50%',
     'color': 'green',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);
@@ -102,7 +102,7 @@ test('schema should return an object with label coverage, percentage 10 and colo
     'message': '10%',
     'color': 'green',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);
@@ -120,7 +120,7 @@ test('schema should return an object with label coverage, percentage 2 and color
     'message': '2%',
     'color': 'blue',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);
@@ -138,7 +138,7 @@ test('schema should return an object with label coverage, percentage 1 and color
     'message': '1%',
     'color': 'blue',
     'style': 'plastic',
-    'logoSvg': 'jest',
+    'namedLogo': 'jest',
   };
 
   expect(badgeSchema).toStrictEqual(expectedBody);

@@ -11,7 +11,7 @@ module.exports.schema = (coveragePercentage, label, colorConfiguration, showJest
     style: 'plastic',
   };
 
-  if (showJestLogo) schema.logoSvg = 'jest';
+  if (showJestLogo) schema.namedLogo = 'jest';
 
   return schema;
 };
