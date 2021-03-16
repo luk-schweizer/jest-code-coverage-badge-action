@@ -1,6 +1,8 @@
 const fetch = require('node-fetch'); // eslint-disable-line
+const retry = require('p-retry'); // eslint-disable-line
 const keyValueAsService= require('../keyValueAsService');
 jest.mock('node-fetch');
+jest.mock('p-retry');
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -50,13 +52,19 @@ test('createNewUrl should post to https://api.keyvalue.xyz/new/coverage and retu
     text: async () => 'https://api.keyvalue.xyz/hsdfg726f/coverage',
   });
 
+  retry.mockImplementation(async (run, retries) => {
+    const response = await run();
+    return response;
+  });
+
   const url = await keyValueAsService.createNewUrl();
 
   expect(fetch).toHaveBeenCalledTimes(1);
-  expect(fetch).toHaveBeenCalledWith('https://api.keyvalue.xyz/new/coverage', {method: 'post'});
+  expect(fetch).toHaveBeenCalledWith('https://api.keyvalue.xyz/new/coverage', {method: 'post', timeout: 1000});
+  expect(retry).toHaveBeenCalledTimes(1);
+  expect(retry).toHaveBeenCalledWith(expect.any(Function), {retries: 3});
   expect(url).toBe('https://api.keyvalue.xyz/hsdfg726f/coverage');
 });
-
 
 test('putCoverageValue should post to url the objectValue', async () => {
   const objectValue = {
@@ -74,5 +82,8 @@ test('putCoverageValue should post to url the objectValue', async () => {
     method: 'post',
     body: JSON.stringify(objectValue),
     headers: {'Content-Type': 'text/plain'},
+    timeout: 1000,
   });
+  expect(retry).toHaveBeenCalledTimes(1);
+  expect(retry).toHaveBeenCalledWith(expect.any(Function), {retries: 3});
 });
