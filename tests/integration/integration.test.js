@@ -1,4 +1,4 @@
-const pRetry = require('p-retry');
+const retry = require('p-retry');
 const fetch = require('node-fetch');
 
 test('jest-code-coverage-badge-action output should return an svg badge with label coverage and value 100% when input label is coverage, coverage of test are 100% and key url is not provided', async () => {
