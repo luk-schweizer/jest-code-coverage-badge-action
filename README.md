@@ -72,7 +72,7 @@ The URL of the generated badge.
     ```
 2) Add the following into your github workflow, using the output from **1)**.
     ```yaml
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.1
     with:
      kvaas-key-url: 'https://api.keyvalue.xyz/55b0216d/coverage'
     ```
@@ -105,19 +105,19 @@ Multiple badges can be generated with different coverage percentage.You will nee
 - Workflow:
     ```yaml
   - name: Statements Badge Coverage
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.1
     with:
       coverage-type: statements
       badge-label: statements 
       kvaas-key-url: 'https://api.keyvalue.xyz/b78465cf/coverage'
   - name: Conditionals Badge Coverage
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.1
     with:
       coverage-type: conditionals
       badge-label: conditionals
       kvaas-key-url: 'https://api.keyvalue.xyz/3d07498c/coverage'
   - name: Methods Badge Coverage
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.0
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.1
     with:
       coverage-type: methods
       badge-label: methods
