@@ -14,10 +14,39 @@ This is a [Github Action](https://github.com/features/actions) that will collect
 - Customizable test command.
 - Code coverage parsed from [Clover XML report](https://istanbul.js.org/docs/advanced/alternative-reporters/#clover) default Jest coverage report.
 - Badge information stored in [Key/Value as a Service (KVaaS)](https://keyvalue.xyz) free cloud service. No registration required.
-
+- Example: ![coverage](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/c6bd776f/coverage)
 <br/>
 
-**Note:** Badge information will be public available. Anyone who knows the url can edit it. Here is an example of the information being stored:``{"schemaVersion":1,"label":"coverage","message":"75.4.1%","color":"green","namedLogo":"jest"}``
+**Note:** Badge information will be public available. Anyone who knows the random generated url by KVaaS service can edit it. Here is an example of the information which is stored:``{"schemaVersion":1,"label":"coverage","message":"75.4%","color":"green","namedLogo":"jest"}``
+
+<br/>
+<br/>
+
+## How to use
+
+1) Generate a new key KVaaS url to store your badge information.
+    - Run in shell:
+    ```shell script
+    curl -X POST https://api.keyvalue.xyz/new/coverage
+    ```
+    - Output example:
+    ```shell script
+    https://api.keyvalue.xyz/55b0216d/coverage
+    ```
+2) Add the following into your github workflow, using the output from **1)**.
+    ```yaml
+    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.1
+    with:
+     kvaas-key-url: 'https://api.keyvalue.xyz/55b0216d/coverage'
+    ```
+3) Add the badge in your readme file, using the output from **1)**.
+    ```markdown
+    ![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/55b0216d/coverage)
+    ```
+4) That's it!<br/>
+   Badge will be automatically updated every time the workflow runs. 
+**Note:** It can take some minutes until the badge updates in github. This happens because github uploads and manage images through [camo proxy](https://docs.github.com/en/github/authenticating-to-github/about-anonymized-image-urls) and it can take some time to update the source.
+
 
 <br/>
 <br/>
@@ -55,34 +84,6 @@ KVaaS key url where to post coverage values. If not present the action will gene
 #### `BADGE_URL`
 
 The URL of the generated badge.
-
-
-<br/>
-
-## How to use
-
-1) Generate a new key KVaaS url to store your badge information.
-    - Run in shell:
-    ```shell script
-    curl -X POST https://api.keyvalue.xyz/new/coverage
-    ```
-    - Output example:
-    ```shell script
-    https://api.keyvalue.xyz/55b0216d/coverage
-    ```
-2) Add the following into your github workflow, using the output from **1)**.
-    ```yaml
-    uses: luk-schweizer/jest-code-coverage-badge-action@v1.0.1
-    with:
-     kvaas-key-url: 'https://api.keyvalue.xyz/55b0216d/coverage'
-    ```
-3) Add the badge in your readme file, using the output from **1)**.
-    ```markdown
-    ![](https://img.shields.io/endpoint?url=https://api.keyvalue.xyz/55b0216d/coverage)
-    ```
-4) That's it! 
-   Badge will be automatically updated every time the workflow runs. 
-**Note:** It can take some minutes until the badge updates in github. This happens because github uploads and manage images through camo proxy and it can take some time to update the source.
 
 <br/>
 <br/>
