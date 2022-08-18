@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/luk-schweizer/jest-code-coverage-badge-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.9.1",
     "@actions/exec": "^1.0.4",
     "node-fetch": "^2.6.1",
     "p-retry": "^4.4.0",
